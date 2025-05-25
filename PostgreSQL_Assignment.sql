@@ -32,7 +32,7 @@ INSERT INTO species (species_name, scientific_name, discovery_date, conservation
 ('Bengal Tiger', 'Panthera tigris tigris', '1758-01-01', 'Endangered'),
 ('Red Panda', 'Ailurus fulgens', '1825-01-01', 'Vulnerable'),
 ('Asiatic Elephant', 'Elephas maximus indicus', '1758-01-01', 'Endangered'),
-('Great Indian Bustard', 'Ardeotis nigriceps', '1861-01-01', 'Critically Endangered'),
+('Great Indian Bustard', 'Ardeotis nigriceps', '1861-01-01', 'Endangered'),
 ('Indian Pangolin', 'Manis crassicaudata', '1822-01-01', 'Endangered');
 
 SELECT * FROM species;
@@ -66,3 +66,28 @@ INSERT INTO rangers (rangers_name, rangers_region) VALUES
 ('Derek Fox', 'Coastal Plains');
 
 -- SELECT * FROM rangers;
+
+-- problem - 2
+SELECT  count(DISTINCT ID) AS unique_species_count FROM species;
+
+-- problem - 3
+SELECT * FROM sightings  
+WHERE sighting_location ILIKE '%Pass%';
+
+-- problem - 4
+SELECT rangers_name , count(*) As total_sightings  FROM rangers 
+GROUP BY rangers_name;
+
+-- problem - 5
+SELECT species_name As common_name  FROM species s 
+LEFT JOIN sightings si ON s.id = si.species_id 
+WHERE si.species_id IS NULL;
+
+-- problem - 6
+
+SELECT s.species_name As common_name ,  si.sighting_time , r.rangers_name FROM 
+sightings si
+INNER JOIN species s  ON  si.species_id = s.id
+INNER JOIN rangers r   ON  si.rangers_id = r.id 
+ORDER BY si.sighting_time DESC LIMIT 2 ;
+
