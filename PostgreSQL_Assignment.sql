@@ -88,6 +88,12 @@ WHERE si.species_id IS NULL;
 SELECT s.species_name As common_name ,  si.sighting_time , r.rangers_name FROM 
 sightings si
 INNER JOIN species s  ON  si.species_id = s.id
-INNER JOIN rangers r   ON  si.rangers_id = r.id 
+INNER JOIN rangers r  ON  si.rangers_id = r.id 
 ORDER BY si.sighting_time DESC LIMIT 2 ;
 
+-- problem - 7 
+SELECT extract(year FROM discovery_date) FROM species;
+
+UPDATE species 
+set conservation_status = 'Historic'
+WHERE extract(year FROM discovery_date) > 1800 ;
