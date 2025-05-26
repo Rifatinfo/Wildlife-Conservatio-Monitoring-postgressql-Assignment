@@ -97,3 +97,19 @@ SELECT extract(year FROM discovery_date) FROM species;
 UPDATE species 
 set conservation_status = 'Historic'
 WHERE extract(year FROM discovery_date) > 1800 ;
+
+
+-- problem - 8
+SELECT id AS sighting_id , 
+CASE
+WHEN EXTRACT(HOUR FROM sighting_time) BETWEEN 5 AND 11 THEN 'Morning'  
+WHEN EXTRACT(HOUR FROM sighting_time) BETWEEN 12 AND 16 THEN 'Afternoon'  
+WHEN EXTRACT(HOUR FROM sighting_time) BETWEEN 17 AND 20 THEN 'Evening'  
+END AS time_of_day
+   FROM sightings;
+
+-- problem - 9
+DELETE FROM species s
+USING sightings si
+WHERE s.id = si.species_id IS NULL;
+
