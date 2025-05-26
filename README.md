@@ -112,7 +112,12 @@ INSERT INTO countries VALUES ('US', 'United States');
 - If you try to insert a string longer than n, PostgreSQL will return an error. 
 
 <pre>
-```
-If you try to insert a string longer than n, PostgreSQL will return an error.
-```
+
+CREATE TABLE users (
+  username VARCHAR(10)
+);
+
+-- Valid: 5 characters
+INSERT INTO users (username) VALUES ('Alice');
+
 </pre>
